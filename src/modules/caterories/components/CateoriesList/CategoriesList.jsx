@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import noData from "../../../../assets/images/no-data.png";
 import DeleteConfirmation from "../../../shared/components/DeleteConfirmation/DeleteConfirmation";
+import { axiosInstance } from "../../../../services/api";
+import { CATEGORY_URLS } from "../../../../services/api/apiURLs";
 export default function CategoriesList() {
   const [categoriesList, setCategoriesList] = useState([]);
   const [selectedId, setSelectedId] = useState(0);
@@ -18,12 +20,7 @@ export default function CategoriesList() {
 
   let getCategoties = async () => {
     try {
-      let response = await axios.get(
-        "https://upskilling-egypt.com:3006/api/v1/Category/?pageSize=10&pageNumber=1",
-        {
-          headers: { Authorization: localStorage.getItem("token") },
-        }
-      );
+      let response = await axiosInstance.get(CATEGORY_URLS.GET_CATEGORIES);
       console.log(response.data.data);
 
       setCategoriesList(response.data.data);

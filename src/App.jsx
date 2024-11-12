@@ -30,8 +30,9 @@ function App() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")); //if loggedIN
-    saveLoginData();
+    if (localStorage.getItem("token")) {
+      saveLoginData();
+    }
   }, []);
 
   const routes = createBrowserRouter([
@@ -43,12 +44,12 @@ function App() {
         { index: true, element: <Login saveLoginData={saveLoginData} /> },
         { path: "login", element: <Login saveLoginData={saveLoginData} /> },
         { path: "register", element: <Registeration /> },
-        { path: "forget-pass", element: <ForgetPass /> },
-        { path: "reset-pass", element: <ResetPass /> },
+        { path: "forget-password", element: <ForgetPass /> },
+        { path: "reset-password", element: <ResetPass /> },
       ],
     },
     {
-      path: "dashboard",
+      path: "",
       element: (
         <ProtectedRoute loginData={loginData}>
           <MasterLayout loginData={loginData} />
@@ -56,8 +57,8 @@ function App() {
       ),
       errorElement: <NotFound />,
       children: [
-        { index: true, element: <Dashboard loginData={loginData}/> },
-        { path: "recipes", element: <RecipesList loginData={loginData}/> },
+        { path: "dashboard", element: <Dashboard loginData={loginData} /> },
+        { path: "recipes", element: <RecipesList loginData={loginData} /> },
         { path: "recipe-data", element: <RecipeData /> },
         { path: "categories", element: <CategoriesList /> },
         { path: "category-data", element: <CategoryData /> },

@@ -5,6 +5,7 @@ import { axiosInstance } from "../../../../services/api";
 import Nodata from "../../../shared/components/NoData/Nodata";
 import DeleteConfirmation from "../../../shared/components/DeleteConfirmation/DeleteConfirmation";
 import noData from "../../../../assets/images/no-data.png";
+import { Link } from "react-router-dom";
 
 export default function RecipesList() {
   const [recipesList, setRecipesList] = useState([]);
@@ -63,7 +64,9 @@ export default function RecipesList() {
 
       <div className="d-flex justify-content-between p-4">
         <h5>Recipes Table Details</h5>
-        <button className="btn btn-success">Add new Recipe</button>
+        <Link to="/recipes/new-recipe" className="btn btn-success">
+          Add new Recipe
+        </Link>
       </div>
 
       <div className="p-4">
@@ -104,10 +107,12 @@ export default function RecipesList() {
                       onClick={() => handleShow(recipe.id)}
                       aria-hidden="true"
                     ></i>
-                    <i
-                      className="fa fa-edit text-warning"
-                      aria-hidden="true"
-                    ></i>
+                    <Link to={`/recipes/${recipe?.id}`}>
+                      <i
+                        className="fa fa-edit text-warning"
+                        aria-hidden="true"
+                      ></i>
+                    </Link>
                   </td>
                 </tr>
               ))}

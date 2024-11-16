@@ -9,13 +9,16 @@ import { axiosInstance } from "../../../../services/api";
 import { CATEGORY_URLS } from "../../../../services/api/apiURLs";
 import Nodata from "../../../shared/components/NoData/Nodata";
 import { useForm } from "react-hook-form";
+import useCategories from "../../hooks/useCategories";
 export default function CategoriesList() {
+  const categoerisQuery = useCategories();
+  console.log(categoerisQuery);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [categoriesList, setCategoriesList] = useState([]);
+
   const [selectedId, setSelectedId] = useState(0);
   const [show, setShow] = useState(false);
 
@@ -29,24 +32,13 @@ export default function CategoriesList() {
   const handleCloseAdd = () => setShowAdd(false);
   const handleShowAdd = () => setShowAdd(true);
 
-  let getCategoties = async () => {
-    try {
-      let response = await axiosInstance.get(CATEGORY_URLS.GET_CATEGORIES);
-      console.log(response.data.data);
-
-      setCategoriesList(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   let onSubmit = async (data) => {
     try {
       let response = await axiosInstance.post(
         CATEGORY_URLS.POST_CATEGORY,
         data
       );
-      getCategoties();
+      categoerisQuery.trigger();
       handleCloseAdd();
     } catch (error) {
       console.log(error);
@@ -59,15 +51,12 @@ export default function CategoriesList() {
         CATEGORY_URLS.DELETE_CATEGORY(selectedId)
       );
       console.log(response);
-      getCategoties();
+      categoerisQuery.trigger();
     } catch (error) {
       console.log(error);
     }
     handleClose();
   };
-  useEffect(() => {
-    getCategoties();
-  }, []);
 
   return (
     <>
@@ -118,7 +107,7 @@ export default function CategoriesList() {
         </button>
       </div>
       <div className="p-4">
-        {categoriesList.length > 0 ? (
+        {categoerisQuery?.categories?.data?.length > 0 ? (
           <table className="table">
             <thead>
               <tr>
@@ -128,7 +117,7 @@ export default function CategoriesList() {
               </tr>
             </thead>
             <tbody>
-              {categoriesList.map((category) => (
+              {categoerisQuery?.categories?.data.map((category) => (
                 <tr key={category.id}>
                   <td>{category.name}</td>
                   <td>{category.creationDate}</td>

@@ -13,6 +13,10 @@
 .sidebar-container {
   background-color: #1f263e;
   border-top-right-radius: 40px;
+  align-self: flex-start;
+  position: sticky;
+  left: 0;
+  top: 0;
 }
 .sidebar-container .ps-sidebar-container {
   background-color: #1f263e;

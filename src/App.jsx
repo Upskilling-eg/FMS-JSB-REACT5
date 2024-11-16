@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import ProtectedRoute from "./modules/shared/components/ProtectedRoute/ProtectedRoute";
+import RecipeForm from "./modules/recipes/components/RecipeForm/RecipeForm";
 
 function App() {
   const [loginData, setLoginData] = useState(null);
@@ -59,6 +60,9 @@ function App() {
       children: [
         { path: "dashboard", element: <Dashboard loginData={loginData} /> },
         { path: "recipes", element: <RecipesList loginData={loginData} /> },
+        { path: "recipes", element: <RecipesList loginData={loginData} /> },
+        { path: "recipes/new-recipe", element: <RecipeForm /> },
+        { path: "recipes/:recipeId", element: <RecipeForm /> },
         { path: "recipe-data", element: <RecipeData /> },
         { path: "categories", element: <CategoriesList /> },
         { path: "category-data", element: <CategoryData /> },

@@ -25,6 +25,8 @@ const RecipeForm = () => {
   useBeforeUnload(() => {
     localStorage.setItem("recipeData", JSON.stringify(getValues()));
   });
+  const recipeId = params.recipeId;
+  console.log("recipe-id", params.recipeId);
 
   const onSubmitHandler = async (data) => {
     const formData = new FormData();
@@ -45,8 +47,8 @@ const RecipeForm = () => {
     }
 
     try {
-      const response = await axiosInstance[isNewRecipe ? "post" : "put"](
-        isNewRecipe
+      const response = await axiosInstance[!recipeId ? "post" : "put"](
+        !recipeId
           ? RECIPE_URLS.CREATE_RECIPE
           : RECIPE_URLS.UPDATE_RECIPE(recipeId),
         formData
@@ -58,8 +60,6 @@ const RecipeForm = () => {
     }
   };
 
-  const recipeId = params.recipeId;
-  const isNewRecipe = recipeId === "new-recipe";
   React.useEffect(() => {
     const getTags = async () => {
       try {
@@ -85,7 +85,7 @@ const RecipeForm = () => {
     (async () => {
       await getTags();
       await getCategoties();
-      if (!isNewRecipe) {
+      if (recipeId) {
         const getRecipe = async () => {
           const response = await axiosInstance.get(
             RECIPE_URLS.GET_RECIPE(recipeId)

@@ -5,15 +5,15 @@ import { useLocation } from "react-router-dom";
 
 export default function Header({ title, description }) {
   const location = useLocation();
-  console.log(location.pathname);
   return (
-    <div className="header-container p-5 d-flex justify-content-between align-items-center">
-      <div className="caption w-50 text-white">
+    <div className="header-container p-5 row  align-items-center">
+      <div className="caption col-md-6 text-white">
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
-      <div className="header-img">
+      <div className="header-img col-md-6 text-end">
         <img
+          className="img-fluid"
           src={location.pathname == "/dashboard" ? HeaderGirl : headerMan}
           alt=""
         />

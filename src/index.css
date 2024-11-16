@@ -10,9 +10,14 @@
     rgba(0, 0, 0, 0.5)
   );
 }
+.sidebar-container {
+  background-color: #1f263e;
+  border-top-right-radius: 40px;
+}
 .sidebar-container .ps-sidebar-container {
   background-color: #1f263e;
   height: 100vh;
+  border-top-right-radius: 40px;
 }
 
 .sidebar-container .ps-menu-button,
@@ -39,13 +44,13 @@
     linear-gradient(90deg, rgba(52, 141, 68, 1) 0%, rgba(61, 71, 103, 0.9) 82%);
 
   .header-img {
-    position: absolute;
+    /* position: absolute;
     bottom: -1rem;
     right: 8rem;
-    width: 18rem;
-    img {
+    width: 18rem; */
+    /* img {
       width: 100%;
-    }
+    } */
   }
 }
 
